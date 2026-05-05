@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+node_modules/
+vendor/
+dist/
+build/
+.next/
+coverage/
+*.zip
+*.tar.gz

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Corfu"
+  short_description: "Closure, forecast, and stop-loss auditor."
+  brand_color: "#0F172A"
+  default_prompt: "$corfu\n\nAudit the current work. Do not edit files. Decide whether this is closable, what remains, whether we are burning tokens, and the single highest-ROI next action."
+policy:
+  allow_implicit_invocation: false
