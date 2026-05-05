@@ -6,6 +6,20 @@ Corfu is a closure, forecast, and stop-loss auditor for AI-assisted software dev
 
 It works as a local skill for **Codex** and **Claude Code**.
 
+## Quick Install from Zero
+
+```bash
+git clone https://github.com/Webyseo/corfu.git
+cd corfu
+bash install/install_all_user.sh
+```
+
+## Prerequisites
+
+- Git
+- Bash on macOS/Linux or PowerShell on Windows
+- Codex and/or Claude Code installed
+
 ## The 10-Second Version
 
 AI coding agents are good at continuing. Corfu is designed to make them stop, inspect evidence, and give one operational decision:
@@ -62,6 +76,12 @@ The bundled snapshot script is read-only. It uses local commands such as `git st
 
 The install scripts only copy the skill files into the target skill directory.
 
+## Privacy Note
+
+Corfu itself does not make network calls. However, snapshot output may be shown to your AI coding environment and can include filenames, changed paths, TODO/FIXME/HACK lines, package scripts, branch metadata, and repository status.
+
+Review your repository and AI coding environment policies before running Corfu on sensitive projects.
+
 ## Repository Layout
 
 ```text
@@ -87,6 +107,8 @@ corfu/
     install_claude_user.sh
     install_all_user.sh
     install_windows.ps1
+  scripts/
+    validate.sh
   examples/
     sample_closure_audit.md
     before_after_loop.md
@@ -168,6 +190,12 @@ Audit the current work. Do not edit files. Decide whether this is closable, what
 bash install/install_all_user.sh
 ```
 
+All shell installers support `--help` and `--dry-run`:
+
+```bash
+bash install/install_all_user.sh --dry-run
+```
+
 ## Windows
 
 PowerShell installation is available for user or project scope:
@@ -176,6 +204,34 @@ PowerShell installation is available for user or project scope:
 .\install\install_windows.ps1 -Tool codex -Scope user
 .\install\install_windows.ps1 -Tool claude -Scope project -ProjectPath C:\path\to\repo
 ```
+
+## Verify Installation
+
+For Codex, confirm the skill exists at one of these paths:
+
+```text
+~/.agents/skills/corfu/SKILL.md
+<repo>/.agents/skills/corfu/SKILL.md
+```
+
+For Claude Code, confirm the skill exists at one of these paths:
+
+```text
+~/.claude/skills/corfu/SKILL.md
+<repo>/.claude/skills/corfu/SKILL.md
+```
+
+Then invoke it explicitly with `$corfu` in Codex or `/corfu` in Claude Code.
+
+## Validation
+
+Validate the repository locally:
+
+```bash
+bash scripts/validate.sh
+```
+
+This checks required files, shell syntax, executable bits, core safety text, manual invocation settings, and obvious dangerous commands in snapshot scripts.
 
 ## Usage Examples
 
