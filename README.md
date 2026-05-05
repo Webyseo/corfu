@@ -6,6 +6,8 @@ Corfu is a closure, forecast, and stop-loss auditor for AI-assisted software dev
 
 It works as a local skill for **Codex** and **Claude Code**.
 
+Current version: `v0.1.0`
+
 ## Quick Install from Zero
 
 ```bash
@@ -13,6 +15,8 @@ git clone https://github.com/Webyseo/corfu.git
 cd corfu
 bash install/install_all_user.sh
 ```
+
+Clone the repo or download the latest release archive from GitHub.
 
 ## Prerequisites
 
@@ -232,6 +236,10 @@ bash scripts/validate.sh
 ```
 
 This checks required files, shell syntax, executable bits, core safety text, manual invocation settings, and obvious dangerous commands in snapshot scripts.
+
+## Manual Smoke Tests
+
+Manual UI checks are listed in [`docs/manual-smoke-tests.md`](docs/manual-smoke-tests.md).
 
 ## Usage Examples
 

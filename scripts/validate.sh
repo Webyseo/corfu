@@ -44,6 +44,8 @@ required_files=(
   CHANGELOG.md
   CONTRIBUTING.md
   SECURITY.md
+  docs/manual-smoke-tests.md
+  docs/release-checklist.md
   .github/workflows/validate.yml
   .github/PULL_REQUEST_TEMPLATE.md
   .github/ISSUE_TEMPLATE/bug_report.md
@@ -68,6 +70,11 @@ for file in "${required_files[@]}"; do
   require_file "$file"
 done
 pass "required files exist"
+
+VERSION="$(tr -d '[:space:]' < VERSION)"
+require_contains CHANGELOG.md "## $VERSION"
+require_contains README.md "Current version: \`v$VERSION\`"
+pass "release version references match VERSION"
 
 while IFS= read -r script; do
   bash -n "$script"
