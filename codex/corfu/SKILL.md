@@ -26,16 +26,24 @@ When invoked, answer these questions:
 ## Default Invocation
 
 - If Corfu is invoked without additional instructions, run the default closure audit on the current repository state.
+- `$corfu` alone defaults to `LOCAL WORKTREE` or `CURRENT TASK`, depending on available context.
+- `$corfu` alone does not default to product/project completion.
+- To audit product or roadmap readiness, users should invoke:
+  - `$corfu product`
+  - `$corfu roadmap`
+  - `/corfu product`
+  - `/corfu roadmap`
 - Do not ask for clarification unless repository evidence is insufficient to produce any useful audit.
 - If there is an active task or conversation objective, use it.
-- If there is no explicit objective, infer the audit target from:
+- If there is no explicit objective, infer the narrowest useful audit target from:
   - git status
   - current diff
   - changed files
   - branch name
   - recent commits
   - validation state if available
-- If there are no tracked changes and no clear active task, audit whether the repository/workstream is closable as-is.
+- If there are no tracked changes and no clear active task, audit whether the local worktree/workstream is closable as-is.
+- If the repo is clean and no active task exists, say the local worktree/workstream is closable and product/release/business completeness is not certified.
 - The default audit must answer:
   - Is the work closable now?
   - What evidence supports that?
@@ -43,12 +51,38 @@ When invoked, answer these questions:
   - Are we looping or burning tokens?
   - What is the single highest-ROI next action?
 
+## Closure Target
+
+Corfu must identify the closure target before deciding closure.
+
+Use exactly one closure target:
+
+- `LOCAL WORKTREE`: no explicit objective; audit current git state and local pending work.
+- `CURRENT TASK`: user supplied a task or active task context is available.
+- `PR / COMMIT`: user invoked `pr`, `commit`, or asks for PR/commit readiness.
+- `RELEASE`: user invoked `ship`, `release`, or asks for release readiness.
+- `PRODUCT / ROADMAP`: user invoked `product`, `roadmap`, or asks whether the whole project/product is done.
+- `BLOCKER DECISION`: user invoked `blocked`, `human`, or asks whether a decision is needed.
+- `UNKNOWN`: evidence is insufficient to infer a useful target.
+
+Rules:
+
+- Always include the closure target in the audit output.
+- If the target is `LOCAL WORKTREE`, never imply the whole product/project is complete.
+- If the repo is clean and the target is `LOCAL WORKTREE`, say the local worktree/workstream is closable, not the product.
+- If the user asks whether the product, project, roadmap, or business is complete, use `PRODUCT / ROADMAP`.
+- If the target is `PRODUCT / ROADMAP` and there is no roadmap, acceptance criteria, product scope, or release criteria available, do not return plain `CLOSABLE`. Return `BLOCKED`, `NOT CLOSABLE`, or `CLOSABLE WITH RISK`, depending on evidence.
+- A clean git status is not enough evidence for product-level closure.
+- A clean git status is not enough evidence for release-level closure if release validation scripts or release checklist files exist.
+- If the target is ambiguous, prefer the narrower target and state the limitation clearly.
+
 ## Invocation Modes
 
 Define these lightweight modes:
 
 - `default`: current repository/workstream closure audit.
 - `ship` or `release`: ship/release readiness; focus on release blockers, validation gaps, and whether to close.
+- `product` or `roadmap`: product/project readiness audit; focus on declared product scope, roadmap gaps, docs, TODOs, release posture, known blockers, and whether product-level closure can be claimed.
 - `stop`, `loop`, or `burn`: stop-loss audit; focus on token burn, repeated attempts, scope drift, and whether to stop.
 - `pr` or `commit`: pre-PR/pre-commit audit; focus on diff scope, untracked files, staged/unstaged changes, validation, and accidental changes.
 - `blocked` or `human`: decision audit; focus on whether a human/product/environment decision is required.
@@ -224,6 +258,19 @@ A task is closable only if:
 
 If the original objective is unclear, infer it from the conversation and repository evidence. If inference is unsafe, classify the audit as `BLOCKED`.
 
+## Product / Roadmap Closure Rules
+
+- Product-level closure requires explicit product scope, roadmap, acceptance criteria, or release criteria.
+- If those are absent, classify as `BLOCKED`, `NOT CLOSABLE`, or `CLOSABLE WITH RISK`, not plain `CLOSABLE`.
+- Recent commits, clean git status, and passing local checks are supporting evidence only; they do not prove product completion.
+- If a product is visibly under active development, avoid `CLOSABLE` unless the user has defined a narrow product milestone and evidence shows that milestone is complete.
+- Prefer a single next action that reduces product-level uncertainty, such as:
+  - define product acceptance criteria
+  - inspect roadmap document
+  - run release validation
+  - review open blockers
+  - validate a specific user flow
+
 ## Closure States
 
 Use exactly one state.
@@ -386,6 +433,10 @@ Always respond in this exact structure:
 ```text
 # Corfu Closure Audit
 
+## Closure Target
+
+LOCAL WORKTREE | CURRENT TASK | PR / COMMIT | RELEASE | PRODUCT / ROADMAP | BLOCKER DECISION | UNKNOWN
+
 ## State
 
 CLOSABLE | CLOSABLE WITH RISK | NOT CLOSABLE | BLOCKED
@@ -470,6 +521,16 @@ One action only.
 
 A direct final sentence.
 ```
+
+## Final Ruling Guard
+
+When `Closure Target` is `LOCAL WORKTREE`, the final ruling must include a sentence equivalent to:
+
+```text
+This does not certify product, roadmap, release, or business completeness.
+```
+
+Do not require exact wording, but require this meaning.
 
 ## Decision Rules
 

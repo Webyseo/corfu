@@ -6,7 +6,7 @@ Corfu is a closure, forecast, and stop-loss auditor for AI-assisted software dev
 
 It works as a local skill for **Codex** and **Claude Code**.
 
-Current version: `v0.1.4`
+Current version: `v0.1.5`
 
 ## Quick Install from Zero
 
@@ -218,12 +218,33 @@ For Claude Code:
 
 This runs the default closure audit.
 
+## Closure Target Matters
+
+`$corfu` with no context audits the current local worktree or active task. A clean repo can be `CLOSABLE` locally without meaning the whole product is finished.
+
+Corfu separates local closure from product closure.
+
+For product-level readiness, use:
+
+```text
+$corfu product
+```
+
+or:
+
+```text
+/corfu product
+```
+
+A clean working tree is not a finished product.
+
 When in doubt, run Corfu before asking the agent to continue.
 
 | Use case | Codex | Claude Code |
 |---|---|---|
 | Default closure audit | `$corfu` | `/corfu` |
 | Ship/release readiness | `$corfu ship` | `/corfu ship` |
+| Product/roadmap readiness | `$corfu product` | `/corfu product` |
 | Stop token burn | `$corfu stop` | `/corfu stop` |
 | Pre-PR/pre-commit audit | `$corfu pr` | `/corfu pr` |
 | Human/blocker decision | `$corfu blocked` | `/corfu blocked` |
@@ -263,7 +284,7 @@ Validate the repository locally:
 bash scripts/validate.sh
 ```
 
-This checks required files, shell syntax, executable bits, core safety text, manual invocation settings, and obvious dangerous commands in snapshot scripts.
+This checks required files, shell syntax, executable bits, core safety text, manual invocation settings, closure target semantics, and obvious dangerous commands in snapshot scripts.
 
 ## Manual Smoke Tests
 
@@ -303,6 +324,10 @@ Longer prompt examples are available in [`prompts/usage_prompts.md`](prompts/usa
 
 ```text
 # Corfu Closure Audit
+
+## Closure Target
+
+RELEASE
 
 ## State
 

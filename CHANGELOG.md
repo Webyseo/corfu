@@ -6,6 +6,14 @@ All notable changes to Corfu are documented here.
 
 - No changes yet.
 
+## 0.1.5
+
+- Added explicit closure target classification.
+- Clarified that clean local worktree closure does not mean product completion.
+- Added product/roadmap invocation mode.
+- Added product/roadmap closure rules.
+- Added validation checks for closure target semantics.
+
 ## 0.1.4
 
 - Added default zero-argument Corfu audit behavior.

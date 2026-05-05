@@ -23,6 +23,18 @@ $corfu ship
 Ship or release readiness.
 
 ```text
+$corfu product
+```
+
+Product or roadmap readiness audit. Use this when a clean repo is not enough and you want to know whether the wider project is actually complete.
+
+```text
+$corfu roadmap
+```
+
+Roadmap-level closure audit.
+
+```text
 $corfu stop
 ```
 

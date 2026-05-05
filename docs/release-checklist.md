@@ -1,6 +1,6 @@
 # Release Checklist
 
-## v0.1.4
+## v0.1.5
 
 1. Run local validation:
 
@@ -23,8 +23,8 @@
 6. Create an annotated tag:
 
    ```bash
-   git tag -a v0.1.4 -m "Corfu v0.1.4"
-   git push origin v0.1.4
+   git tag -a v0.1.5 -m "Corfu v0.1.5"
+   git push origin v0.1.5
    ```
 
    Do not move existing published tags. If a tag already exists, release the next patch version instead.

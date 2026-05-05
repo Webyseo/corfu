@@ -23,3 +23,11 @@
 3. Run `$corfu release` or `/corfu release`.
 4. Release only if Corfu says `CLOSABLE` or `CLOSABLE WITH RISK`.
 5. Do not polish after release readiness is already established unless there is a must-fix.
+
+## Product Readiness Check
+
+1. Confirm the product scope, milestone, or roadmap is documented.
+2. Run `$corfu product` or `/corfu product`.
+3. Do not treat a clean working tree as product completion.
+4. If Corfu returns `BLOCKED`, define acceptance criteria or roadmap scope before asking for closure.
+5. If Corfu returns `CLOSABLE WITH RISK`, decide whether the named risks are acceptable before closing.
