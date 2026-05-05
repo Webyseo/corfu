@@ -1,6 +1,6 @@
 # Release Checklist
 
-## v0.1.0
+## v0.1.1
 
 1. Run local validation:
 
@@ -23,11 +23,11 @@
 6. Create an annotated tag:
 
    ```bash
-   git tag -a v0.1.0 -m "Corfu v0.1.0"
-   git push origin v0.1.0
+   git tag -a v0.1.1 -m "Corfu v0.1.1"
+   git push origin v0.1.1
    ```
 
-   If `v0.1.0` already exists locally or remotely, stop and reconcile the tag and GitHub Release target before continuing.
+   Do not move existing published tags. If a tag already exists, release the next patch version instead.
 
 7. Create the GitHub Release.
 
