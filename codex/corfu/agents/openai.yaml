@@ -2,6 +2,9 @@ interface:
   display_name: "Corfu"
   short_description: "Closure, forecast, and stop-loss auditor."
   brand_color: "#0F172A"
-  default_prompt: "$corfu\n\nAudit the current work. Do not edit files. Decide whether this is closable, what remains, whether we are burning tokens, and the single highest-ROI next action."
+  default_prompt: |-
+    $corfu
+
+    Run the default closure audit on the current repository state. Do not edit files. Decide whether this is closable, blocked, risky, looping, or worth continuing. Give exactly one next action.
 policy:
   allow_implicit_invocation: false

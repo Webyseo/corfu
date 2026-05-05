@@ -1,7 +1,7 @@
 ---
 name: corfu
 description: Closure, forecast, and stop-loss auditor for software projects. Use manually when a task, feature, PR, sprint, or project may be done, shippable, looping, wasting tokens, or needing a realistic closure forecast. Corfu audits evidence, estimates remaining work, detects scope drift, and recommends exactly one next action. It must not implement changes unless the user explicitly asks after the audit.
-argument-hint: "[objective, acceptance criteria, or reason for audit]"
+argument-hint: "[optional: ship | stop | pr | blocked | release | objective]"
 disable-model-invocation: true
 allowed-tools:
   - Read
@@ -50,6 +50,54 @@ When invoked, answer these questions:
 5. Is the agent looping, expanding scope, or burning tokens?
 6. What is the smallest highest-ROI next action?
 7. Should work continue, stop, ship, validate, revert, or escalate?
+
+## Default Invocation
+
+- If Corfu is invoked without additional instructions, run the default closure audit on the current repository state.
+- Do not ask for clarification unless repository evidence is insufficient to produce any useful audit.
+- If there is an active task or conversation objective, use it.
+- If there is no explicit objective, infer the audit target from:
+  - git status
+  - current diff
+  - changed files
+  - branch name
+  - recent commits
+  - validation state if available
+- If there are no tracked changes and no clear active task, audit whether the repository/workstream is closable as-is.
+- The default audit must answer:
+  - Is the work closable now?
+  - What evidence supports that?
+  - What remains before responsible closure?
+  - Are we looping or burning tokens?
+  - What is the single highest-ROI next action?
+
+## Invocation Modes
+
+Define these lightweight modes:
+
+- `default`: current repository/workstream closure audit.
+- `ship` or `release`: ship/release readiness; focus on release blockers, validation gaps, and whether to close.
+- `stop`, `loop`, or `burn`: stop-loss audit; focus on token burn, repeated attempts, scope drift, and whether to stop.
+- `pr` or `commit`: pre-PR/pre-commit audit; focus on diff scope, untracked files, staged/unstaged changes, validation, and accidental changes.
+- `blocked` or `human`: decision audit; focus on whether a human/product/environment decision is required.
+
+Rules:
+
+- Treat short text after `$corfu` or `/corfu` as mode/context, not as a request to implement.
+- If multiple modes appear, choose the most closure-critical interpretation.
+- Always remain audit-only.
+- Always give exactly one next action.
+
+## Default Concision
+
+For default or short-mode invocations:
+
+- Keep Evidence to 3-5 bullets unless more are essential.
+- Keep Must-Fix to the smallest blocking set.
+- Keep Should-Fix to 3 items or fewer.
+- Keep Risks to 3 items or fewer.
+- Keep the Single Next Action to one operational sentence.
+- Do not produce long commentary when the repo is clearly closable.
 
 ## Non-Negotiable Rules
 

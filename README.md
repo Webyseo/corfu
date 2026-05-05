@@ -6,7 +6,7 @@ Corfu is a closure, forecast, and stop-loss auditor for AI-assisted software dev
 
 It works as a local skill for **Codex** and **Claude Code**.
 
-Current version: `v0.1.3`
+Current version: `v0.1.4`
 
 ## Quick Install from Zero
 
@@ -113,6 +113,10 @@ corfu/
     install_windows.ps1
   scripts/
     validate.sh
+  docs/
+    manual-smoke-tests.md
+    release-checklist.md
+    workflows.md
   examples/
     sample_closure_audit.md
     before_after_loop.md
@@ -150,8 +154,6 @@ Use it in Codex:
 
 ```text
 $corfu
-
-Audit the current work. Do not edit files. Decide whether this is closable, what remains, whether we are burning tokens, and the single highest-ROI next action.
 ```
 
 ## Install for Claude Code
@@ -186,8 +188,6 @@ Use it in Claude Code:
 
 ```text
 /corfu
-
-Audit the current work. Do not edit files. Decide whether this is closable, what remains, whether we are burning tokens, and the single highest-ROI next action.
 ```
 
 ## Install for Both
@@ -201,6 +201,32 @@ All shell installers support `--help` and `--dry-run`:
 ```bash
 bash install/install_all_user.sh --dry-run
 ```
+
+## Simplest Use
+
+For Codex:
+
+```text
+$corfu
+```
+
+For Claude Code:
+
+```text
+/corfu
+```
+
+This runs the default closure audit.
+
+When in doubt, run Corfu before asking the agent to continue.
+
+| Use case | Codex | Claude Code |
+|---|---|---|
+| Default closure audit | `$corfu` | `/corfu` |
+| Ship/release readiness | `$corfu ship` | `/corfu ship` |
+| Stop token burn | `$corfu stop` | `/corfu stop` |
+| Pre-PR/pre-commit audit | `$corfu pr` | `/corfu pr` |
+| Human/blocker decision | `$corfu blocked` | `/corfu blocked` |
 
 ## Windows
 
@@ -243,33 +269,31 @@ This checks required files, shell syntax, executable bits, core safety text, man
 
 Manual UI checks are listed in [`docs/manual-smoke-tests.md`](docs/manual-smoke-tests.md).
 
+## Workflows
+
+See [`docs/workflows.md`](docs/workflows.md) for simple before-commit, loop-stop, and before-release workflows.
+
 ## Usage Examples
 
 Stop a looping coding session:
 
 ```text
-/corfu
-
-Stop implementation. Audit the current work. Decide whether continuing has positive ROI. If not, recommend closure, validation, or human decision. Do not edit files.
+$corfu stop
 ```
 
 Audit ship readiness:
 
 ```text
-$corfu
-
-Run a closure audit for this feature against the original objective. Classify the state, estimate minimum viable closure, proper closure, and polished closure. Give one next action only. Do not edit files.
+$corfu release
 ```
 
-Force a hard stop:
+Check for a human blocker:
 
 ```text
-/corfu
-
-Assume token budget is nearly exhausted. Produce a closure audit and choose exactly one next action. If evidence is insufficient, say what single validation or human decision is required. Do not continue implementation.
+/corfu blocked
 ```
 
-More prompts are available in [`prompts/usage_prompts.md`](prompts/usage_prompts.md).
+Longer prompt examples are available in [`prompts/usage_prompts.md`](prompts/usage_prompts.md).
 
 ## Real-World Examples
 

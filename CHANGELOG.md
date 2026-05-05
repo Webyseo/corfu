@@ -6,6 +6,15 @@ All notable changes to Corfu are documented here.
 
 - No changes yet.
 
+## 0.1.4
+
+- Added default zero-argument Corfu audit behavior.
+- Added lightweight invocation modes for default, ship, stop, pr, blocked, and release use cases.
+- Added concise default audit guidance for recurrent use.
+- Added workflow documentation for before-commit, loop-stop, and before-release use.
+- Updated README and prompt examples for simpler recurrent invocation.
+- Added validation checks for invocation UX.
+
 ## 0.1.3
 
 - Corrected release metadata after the v0.1.2 tag was published with 0.1.1 metadata.

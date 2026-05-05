@@ -46,6 +46,7 @@ required_files=(
   SECURITY.md
   docs/manual-smoke-tests.md
   docs/release-checklist.md
+  docs/workflows.md
   .github/workflows/validate.yml
   .github/PULL_REQUEST_TEMPLATE.md
   .github/ISSUE_TEMPLATE/bug_report.md
@@ -107,8 +108,32 @@ for skill_file in codex/corfu/SKILL.md claude/corfu/SKILL.md; do
   require_contains "$skill_file" "Do not write implementation code."
   require_contains "$skill_file" "Single Next Action"
   require_contains "$skill_file" "Loop / Token-Burn Analysis"
+  require_contains "$skill_file" "Default Invocation"
+  require_contains "$skill_file" "Invocation Modes"
+  require_contains "$skill_file" "Default Concision"
+  require_contains "$skill_file" "If Corfu is invoked without additional instructions"
+  require_contains "$skill_file" "Treat short text after \`\$corfu\` or \`/corfu\` as mode/context"
+  require_contains "$skill_file" "ship"
+  require_contains "$skill_file" "stop"
+  require_contains "$skill_file" "pr"
+  require_contains "$skill_file" "blocked"
 done
 pass "skill safety and output contract checks passed"
+
+require_contains README.md "Simplest Use"
+require_contains README.md "\$corfu"
+require_contains README.md "/corfu"
+require_contains README.md "When in doubt, run Corfu before asking the agent to continue."
+require_contains README.md "docs/workflows.md"
+
+require_contains prompts/usage_prompts.md "Minimal Commands"
+require_contains prompts/usage_prompts.md "\$corfu ship"
+require_contains prompts/usage_prompts.md "\$corfu stop"
+require_contains prompts/usage_prompts.md "\$corfu pr"
+require_contains prompts/usage_prompts.md "\$corfu blocked"
+
+require_contains codex/corfu/agents/openai.yaml "allow_implicit_invocation: false"
+pass "invocation UX checks passed"
 
 for snapshot in codex/corfu/scripts/corfu_snapshot.sh claude/corfu/scripts/corfu_snapshot.sh; do
   reject_contains "$snapshot" "rm -rf"
