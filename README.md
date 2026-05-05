@@ -122,19 +122,7 @@ corfu/
 
 ## Install for Codex
 
-Install Corfu into a specific repository:
-
-```bash
-bash install/install_codex_repo.sh /path/to/your/repo
-```
-
-This installs the skill at:
-
-```text
-<repo>/.agents/skills/corfu
-```
-
-Install Corfu globally for your user:
+Recommended for daily use: install Corfu globally for your user:
 
 ```bash
 bash install/install_codex_user.sh
@@ -144,6 +132,18 @@ This installs the skill at:
 
 ```text
 ~/.agents/skills/corfu
+```
+
+Advanced/project-local: install Corfu into a specific repository:
+
+```bash
+bash install/install_codex_repo.sh /path/to/your/repo
+```
+
+This installs the skill at:
+
+```text
+<repo>/.agents/skills/corfu
 ```
 
 Use it in Codex:
@@ -156,7 +156,7 @@ Audit the current work. Do not edit files. Decide whether this is closable, what
 
 ## Install for Claude Code
 
-Install Corfu globally for your user:
+Recommended for daily use: install Corfu globally for your user:
 
 ```bash
 bash install/install_claude_user.sh
@@ -168,7 +168,7 @@ This installs the skill at:
 ~/.claude/skills/corfu
 ```
 
-Install Corfu into a specific repository:
+Advanced/project-local: install Corfu into a specific repository:
 
 ```bash
 bash install/install_claude_project.sh /path/to/your/repo
@@ -179,6 +179,8 @@ This installs the skill at:
 ```text
 <repo>/.claude/skills/corfu
 ```
+
+Repo-scope installation creates `.agents/` or `.claude/` inside the target repository. These directories may appear as untracked in git status. Do not commit them unless you intentionally want to vendor Corfu into that repository.
 
 Use it in Claude Code:
 

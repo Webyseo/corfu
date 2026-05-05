@@ -74,4 +74,7 @@ chmod +x "$DEST/scripts/corfu_snapshot.sh" 2>/dev/null || true
 [ -f "$DEST/scripts/corfu_snapshot.sh" ] || { echo "ERROR: Post-install validation failed: $DEST/scripts/corfu_snapshot.sh missing" >&2; exit 1; }
 
 echo "Installed Corfu $VERSION for Claude Code project scope at: $DEST"
+echo "Note: repo-scope installation creates .claude/ inside the target repository."
+echo "It may appear as untracked in git status. Do not commit it unless you intentionally want to vendor Corfu into that repository."
+echo "For daily use, prefer user-scope install: bash install/install_claude_user.sh"
 echo "Use in Claude Code with: /corfu"

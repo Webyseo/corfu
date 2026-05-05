@@ -10,6 +10,7 @@ Manual UI invocation is required because repository validation can prove file st
 4. Invoke `$corfu`.
 5. Confirm Corfu produces a closure audit.
 6. Confirm no files are edited.
+7. Remove the `.agents/` directory after the test unless you intentionally want to keep the repo-local installation.
 
 ## Codex User Install
 
@@ -26,6 +27,7 @@ Manual UI invocation is required because repository validation can prove file st
 4. Invoke `/corfu`.
 5. Confirm the live snapshot appears or failure is clearly reported.
 6. Confirm no files are edited.
+7. Remove the `.claude/` directory after the test unless you intentionally want to keep the repo-local installation.
 
 ## Claude Code User Install
 
