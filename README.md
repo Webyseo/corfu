@@ -269,6 +269,10 @@ Assume token budget is nearly exhausted. Produce a closure audit and choose exac
 
 More prompts are available in [`prompts/usage_prompts.md`](prompts/usage_prompts.md).
 
+## Real-World Examples
+
+- [Codex CLI read-only smoke test, v0.1.1](examples/real-world/codex-cli-readonly-v0.1.1.md)
+
 ## Sample Output
 
 ```text
