@@ -81,6 +81,7 @@ echo
 echo "## Package Scripts"
 if [ -f package.json ]; then
   if command -v node >/dev/null 2>&1; then
+    # shellcheck disable=SC2016
     node -e '
       const fs = require("fs");
       const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
