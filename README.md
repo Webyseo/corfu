@@ -6,7 +6,7 @@ Corfu is a closure, forecast, and stop-loss auditor for AI-assisted software dev
 
 It works as a local skill for **Codex** and **Claude Code**.
 
-Current version: `v0.1.1`
+Current version: `v0.1.3`
 
 ## Quick Install from Zero
 

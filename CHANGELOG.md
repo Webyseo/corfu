@@ -6,6 +6,19 @@ All notable changes to Corfu are documented here.
 
 - No changes yet.
 
+## 0.1.3
+
+- Corrected release metadata after the v0.1.2 tag was published with 0.1.1 metadata.
+- Preserved existing published tags; v0.1.2 was not moved.
+
+## 0.1.2
+
+- Clarified repo-scope install artifacts.
+- Recommended user-scope installation for daily use.
+- Explained that repo-scope installation may create untracked `.agents/` or `.claude/` directories.
+- Updated repo-scope installer output.
+- Updated manual smoke test guidance.
+
 ## 0.1.1
 
 - Added local repository validation script.
